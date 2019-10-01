@@ -8,7 +8,29 @@ public class Main {
 
         String newText = unText.replaceAll("[[\\.\\?\\!\\,\\;\\:\\{\\}\\(\\)\\']]", "").toUpperCase();
 
-        String[] words = newText.split(" +");
+        String[] splitText = newText.split(" ");
         System.out.println(unText);
+
+        HashMap<String, Integer> countHashMap = new HashMap<String, Integer>();
+        for (String s : splitText) {
+            if (countHashMap.containsKey(s)) {
+                countHashMap.put(s, countHashMap.get(s) + 1);
+            } else {
+                countHashMap.put(s, 1);
+            }
+        }
+
+        ArrayList<HashMap.Entry<String, Integer>> top = new ArrayList<HashMap.Entry<String, Integer>>();
+        top.addAll(countHashMap.entrySet());
+
+        Collections.sort(top, new Comparator<HashMap.Entry<String, Integer>>(){
+            public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2) {
+                return o2.getValue() - o1.getValue();
+            }
+            });
+            System.out.println("\n*** TOP 50 WORDS ****");
+            for (int i = 1; i < 51; i++) {
+                System.out.println((i) + ": " + top.get(i).getKey() + " appears " + top.get(i).getValue() + " times");
+            }
     }
 }
