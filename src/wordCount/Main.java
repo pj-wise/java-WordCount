@@ -9,7 +9,7 @@ public class Main {
         String newText = unText.replaceAll("[[\\.\\?\\!\\,\\;\\:\\{\\}\\(\\)\\']]", "").toUpperCase();
 
         String[] splitText = newText.split(" ");
-        System.out.println(unText);
+        // System.out.println(unText); // checking if all text logs
 
         HashMap<String, Integer> countHashMap = new HashMap<String, Integer>();
         for (String s : splitText) {
@@ -23,14 +23,14 @@ public class Main {
         ArrayList<HashMap.Entry<String, Integer>> top = new ArrayList<HashMap.Entry<String, Integer>>();
         top.addAll(countHashMap.entrySet());
 
-        Collections.sort(top, new Comparator<HashMap.Entry<String, Integer>>(){
+        Collections.sort(top, new Comparator<HashMap.Entry<String, Integer>>() {
             public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2) {
                 return o2.getValue() - o1.getValue();
             }
-            });
-            System.out.println("\n*** TOP 50 WORDS ****");
-            for (int i = 1; i < 51; i++) {
-                System.out.println((i) + ": " + top.get(i).getKey() + " appears " + top.get(i).getValue() + " times");
-            }
+        });
+        System.out.println("\n*** TOP 50 WORDS ****");
+        for (int i = 0; i < 50; i++) {
+            System.out.println((i + 1) + ": " + top.get(i).getKey() + " appears " + top.get(i).getValue() + " times");
+        }
     }
 }
